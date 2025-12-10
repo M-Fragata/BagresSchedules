@@ -1,17 +1,58 @@
-import http from "node:http"
+import express from "express"
+import cors from "cors"
+import { bagreSchedule } from "./middleware/bagreSchema.js"
+import { database } from "./middleware/database.js"
 
+const app = express()
 const port = 3333
 
-const server = http.createServer((req, res) => {
+app.use(express.json())
+app.use(cors())
 
-    const { method, url } = req
+app.get("/bagreSchedule", async (req, res) => {
+
+    try {
+        const schedules = await bagreSchedule.find({})
+
+        return res
+            .status(200)
+            .json(schedules)
+
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ error: "Falha ao buscar agendamentos no banco de dados"})
+    }
+})
+
+app.post("/bagreSchedule", async (req, res) => {
+
+    try {
+        // req.body contém os dados enviados pelo Frontend (graças ao express.json())
+        const newSchedule = new bagreSchedule(req.body)
+
+        // Salva o novo agendamento no mongoDB
+        await newSchedule.save()
+
+        return res
+            .status(201)
+            .json(newSchedule);
+    } catch (error) {
+        console.error("Erro ao criar agendamento:", error.message)
+
+        return res
+            .status(500)
+            .json({ error: "Falha ao salvar o agendamento no banco de dados." });
+    }
 
 })
 
-const startServer = () => {
+const startServer = async () => {
 
-    server.listen(port, () => {
-        console.log("Servidor rodando")
+    await database()
+
+    app.listen(port, () => {
+        console.log(`Servidor rodando em http://localhost:${port}/bagreSchedule`)
     })
 
 }
