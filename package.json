@@ -1,0 +1,23 @@
+{
+  "name": "bagresschedules",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/server.js",
+  "scripts": {
+    "dev": "node --watch ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/M-Fragata/BagresSchedules.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/M-Fragata/BagresSchedules/issues"
+  },
+  "homepage": "https://github.com/M-Fragata/BagresSchedules#readme",
+  "dependencies": {
+    "mongoose": "^9.0.1"
+  }
+}

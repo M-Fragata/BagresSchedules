@@ -1,0 +1,183 @@
+
+.form {
+  grid-area: form;
+  max-width: 512px;
+
+  background-image: url(../assets/priscila.jpeg);
+  background-size: cover;
+  background-position: center center;
+
+  background-color: #020242;
+  border: 1px solid rgba(255, 255, 255, 0.656);
+  box-shadow: 0px 0px 10px white;
+  border-radius: 0.75rem;
+
+  padding: 5rem;
+  padding-bottom: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: scroll;
+}
+
+@media screen and (min-width: 550px) and (max-width: 1100px) {
+  .form {
+    background-image: url(../assets/hero.jpeg);
+    background-position: center bottom;
+  }
+}
+
+.form>header {
+  max-width: 21rem;
+  margin-bottom: 1.5rem;
+}
+
+.form>header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.form>header p {
+  color: #ff0404;
+  font-size: .87rem;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 1rem;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  height: 3rem;
+
+  border: 1px solid #ffffff;
+  padding: 0.87rem 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px white;
+
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
+.input i {
+  margin-right: 0.5rem;
+}
+
+.input input {
+  flex: 1;
+
+  font-family: "Catamaran", sans-serif;
+
+  font-size: 1.1rem;
+  color: #ffffff;
+  background-color: transparent;
+  
+
+  outline: none;
+  border: none;
+}
+
+#client::placeholder{
+  color: white;
+}
+
+.input:focus-within {
+  border: 1.5px solid #ff0404;
+  box-shadow: 0px 0px 10px #ff0404d4;
+}
+
+.button {
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 0.87rem;
+  background-color: #f30202b7;
+  box-shadow: 0px 0px 10px rgba(222, 0, 0, 0.882);
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.button:hover {
+  background-color: #ffffffb7;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.882);
+  color: black;
+}
+
+::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  background: url("../assets/arrow-down.png") no-repeat;
+}
+
+.hours {
+  list-style: none;
+
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  margin-bottom: 2rem;
+}
+
+.hour {
+  width: 4.87rem;
+  height: 2.5rem;
+
+  border-radius: 0.5rem;
+
+  font-size: 1rem;
+  border: 1px solid #6d6d6d;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.818);
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hour-period {
+  width: 100%;
+  color: #ffffff;
+  font-size: 0.87rem;
+
+  margin-top: 0.75rem;
+}
+
+.hour-available {
+  background-color: #020242;
+}
+
+.hour-unavailable {
+  opacity: 1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.hour-selected {
+  border: 2px solid #ff0404;
+  box-shadow: 0px 0px 10px rgba(222, 0, 0, 0.882);
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.hour:not(.hour-unavailable):hover {
+  border: 2px solid #fff;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+@media (max-width: 1100px) {
+  .form {
+    overflow-y: auto;
+    max-width: 100%;
+  }
+}
