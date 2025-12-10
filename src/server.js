@@ -12,13 +12,26 @@ app.use(cors())
 app.get("/bagreSchedule", async (req, res) => {
 
     try {
-        const schedules = await bagreSchedule.find({})
+
+        const selectedDate = req.query.date
+
+        console.log(selectedDate)
+
+        let query = {}
+
+        if (selectedDate) {
+            query = {when: selectedDate}
+            console.log(`[Backend Log] Filtrando por data: ${selectedDate}`)
+        }
+
+        const schedules = await bagreSchedule.find(query)
 
         return res
             .status(200)
             .json(schedules)
 
     } catch (error) {
+        console.error("Erro ao buscar agendamentos:", error.message);
         return res
             .status(500)
             .json({ error: "Falha ao buscar agendamentos no banco de dados"})
@@ -41,7 +54,7 @@ app.post("/bagreSchedule", async (req, res) => {
         console.error("Erro ao criar agendamento:", error.message)
 
         return res
-            .status(500)
+            .status(400)
             .json({ error: "Falha ao salvar o agendamento no banco de dados." });
     }
 
