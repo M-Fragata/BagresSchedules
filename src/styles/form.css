@@ -12,8 +12,8 @@
   box-shadow: 0px 0px 10px white;
   border-radius: 0.75rem;
 
-  padding: 5rem;
-  padding-bottom: 1.5rem;
+  padding: 1.5rem;
+
 
   display: flex;
   flex-direction: column;
@@ -118,13 +118,18 @@
 }
 
 .hours {
+  
   list-style: none;
 
   display: flex;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
 
   margin-bottom: 2rem;
+}
+
+.hour-schedule{
+  margin-bottom: 2px;
 }
 
 .hour {
@@ -148,7 +153,8 @@
   width: 100%;
   color: #ffffff;
   font-size: 0.87rem;
-
+  font-weight: bold;
+  text-align: center;
   margin-top: 0.75rem;
 }
 
