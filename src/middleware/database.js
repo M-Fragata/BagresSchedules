@@ -1,10 +1,9 @@
 import mongoose from "mongoose"
 
 export const database = async () => {
-    const uri = "mongodb+srv://Fragata:m4th3us1@cluster0.bdixruu.mongodb.net/?appName=Cluster0"
 
     try {
-        await mongoose.connect(uri)
+        await mongoose.connect(process.env.MONGO_URI)
         console.log("Conectado ao banco de dados")
     } catch (error) {
         console.log(error)

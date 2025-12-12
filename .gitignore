@@ -1,1 +1,13 @@
-node_modules
+# 1. Dependências do Node
+/node_modules
+
+# 2. Variáveis de Ambiente e Arquivos de Configuração Secreta
+.env
+.env.local
+
+# 3. Arquivos de Sistema e de Cache
+.DS_Store
+.vscode/
+
+# 4. Logs e Cache do NPM
+npm-debug.log*

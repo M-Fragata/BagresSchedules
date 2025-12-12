@@ -4,10 +4,14 @@ import { bagreSchedule } from "./middleware/bagreSchema.js"
 import { database } from "./middleware/database.js"
 
 const app = express()
-const port = 3333
+const port = process.env.PORT || 3333
 
 app.use(express.json())
 app.use(cors())
+
+app.get('/', (req, res) => {
+    res.status(200).send("Bagre Schedule API is running!");
+})
 
 app.get("/bagreSchedule", async (req, res) => {
 
