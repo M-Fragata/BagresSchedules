@@ -3,6 +3,7 @@ import { openingHours } from "../utils/openingHours.js"
 import { createNewSchedule } from "../scripts/createSchedules.js"
 import { getSchedules } from "./getSchedules.js"
 import { loadSchedules } from "./loadSchedules.js"
+import { cleanInputSchedule } from "./cleanInputSchedule.js"
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
@@ -51,11 +52,11 @@ hourContainer.addEventListener('click', (event) => {
 
     if (hourSelected === previouslySelected) {
         return
-    }    
+    }
 
 })
 
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
     event.preventDefault()
 
     const hourSchedule = document.querySelector('.hour-selected')
@@ -69,4 +70,8 @@ form.addEventListener('submit', (event) => {
 
     createNewSchedule(scheduleData)
 
+    const schedules = await getSchedules(dateInput.value)
+    loadSchedules(schedules)
+
+    cleanInputSchedule(name, hourSchedule)
 })
