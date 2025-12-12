@@ -1,14 +1,80 @@
+import { getSchedules } from "../scripts/getSchedules.js"
 
-export const loadSchedules = async (selectedDate) => {
-    const apiUrl = `http:localhost:3333/bagreSchedule?date=${selectedDate}`
+const periodMorning = document.querySelector('#period-morning')
+const periodAfternoon = document.querySelector('#period-afternoon')
+const periodNight = document.querySelector('#period-night')
 
-    console.log(`Buscando agendamentos para: ${selectedDate}`)
+export const loadSchedules = async (schedules) => {
 
-    const response = await fetch(apiUrl)
-    
-    if (!response.ok) {
-        throw new Error('Não foi possível carregar os agendamentos.');
-    }
+    periodMorning.innerHTML = ''
+    periodAfternoon.innerHTML = ''
+    periodNight.innerHTML = ''
 
-    return response.json();
+    const schedulesMorning = schedules.map((schedule) => {
+
+        const scheduleHour = schedule.hour
+        const [scheduleHourString] = scheduleHour.split(":")
+        const scheduleHourNumber = Number(scheduleHourString)
+        
+
+        if (scheduleHourNumber >= 8 && scheduleHourNumber <= 11) {
+            return `
+                    <li>
+                        <strong>${schedule.hour}</strong>
+                        <span>${schedule.name}</span>
+                        <img
+                            src="../src/assets/cancel.svg"
+                            alt="Cancelar"
+                            class="cancel-icon"
+                        />
+                    </li>
+                    `
+        }
+    }).join("")
+
+    const schedulesAfternoon = schedules.map((schedule) => {
+
+        const scheduleHour = schedule.hour
+        const [scheduleHourString] = scheduleHour.split(":")
+        const scheduleHourNumber = Number(scheduleHourString)
+
+        if (scheduleHourNumber >= 14 && scheduleHourNumber <= 17) {
+            return `
+                    <li>
+                        <strong>${schedule.hour}</strong>
+                        <span>${schedule.name}</span>
+                        <img
+                            src="../src/assets/cancel.svg"
+                            alt="Cancelar"
+                            class="cancel-icon"
+                        />
+                    </li>
+                    `
+        }
+    }).join("")
+
+    const schedulesNight = schedules.map((schedule) => {
+
+        const scheduleHour = schedule.hour
+        const [scheduleHourString] = scheduleHour.split(":")
+        const scheduleHourNumber = Number(scheduleHourString)
+
+        if (scheduleHourNumber > 17 && scheduleHourNumber <= 21) {
+            return `
+                    <li>
+                        <strong>${schedule.hour}</strong>
+                        <span>${schedule.name}</span>
+                        <img
+                            src="../src/assets/cancel.svg"
+                            alt="Cancelar"
+                            class="cancel-icon"
+                        />
+                    </li>
+                    `
+        }
+    }).join("")
+
+    periodMorning.innerHTML = schedulesMorning
+    periodAfternoon.innerHTML = schedulesAfternoon
+    periodNight.innerHTML = schedulesNight
 }

@@ -1,7 +1,6 @@
 
 export function renderHours(hours, isBefore) {
 
-    const targetElement = document.querySelector('#hours')
     const targetMorning = document.querySelector('#morning')
     const targetAfternoon = document.querySelector('#afternoon')
     const targetNight = document.querySelector('#night')

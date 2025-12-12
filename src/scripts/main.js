@@ -1,6 +1,8 @@
 import { renderHours } from "../scripts/loadHours.js"
 import { openingHours } from "../utils/openingHours.js"
 import { createNewSchedule } from "../scripts/createSchedules.js"
+import { getSchedules } from "./getSchedules.js"
+import { loadSchedules } from "./loadSchedules.js"
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
@@ -8,15 +10,19 @@ const hourContainer = document.querySelector('#hours')
 const name = document.querySelector('#client')
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
     dateInput.value = dayjs().format("YYYY-MM-DD")
 
     renderHours(openingHours)
 
+    getSchedules(dateInput.value)
+
+    const schedules = await getSchedules(dateInput.value)
+    loadSchedules(schedules)
 })
 
-dateInput.addEventListener('change', () => {
+dateInput.addEventListener('change', async () => {
 
     const isBefore = dayjs().isBefore(dayjs(dateInput.value))
 
@@ -25,6 +31,9 @@ dateInput.addEventListener('change', () => {
     }
 
     renderHours(openingHours, isBefore)
+
+    const schedules = await getSchedules(dateInput.value)
+    loadSchedules(schedules)
 
 })
 
@@ -50,14 +59,13 @@ form.addEventListener('submit', (event) => {
     event.preventDefault()
 
     const hourSchedule = document.querySelector('.hour-selected')
+    const hourScheduleString = hourSchedule.textContent.trim()
 
     const scheduleData = {
         when: dateInput.value,
-        hour: hourSchedule.value,
+        hour: hourScheduleString,
         name: name.value
     }
-
-    console.log(hourSchedule.value)
 
     createNewSchedule(scheduleData)
 

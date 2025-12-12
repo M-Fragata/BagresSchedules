@@ -15,6 +15,10 @@ export const createNewSchedule = async (scheduleData) => {
         throw new Error("Dados incompletos! Verifique os campos")
     }
 
+    if(response.status === 201){
+        alert("Agendamento criado com sucesso")
+    }
+
     if(!response.ok) {
         throw new Error("Falha ao agendar. Tente novamente")
     }
