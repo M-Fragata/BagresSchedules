@@ -1,9 +1,11 @@
 import { renderHours } from "../scripts/loadHours.js"
 import { openingHours } from "../utils/openingHours.js"
+import { createNewSchedule } from "../scripts/createSchedules.js"
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
 const hourContainer = document.querySelector('#hours')
+const name = document.querySelector('#client')
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,11 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     dateInput.value = dayjs().format("YYYY-MM-DD")
 
     renderHours(openingHours)
-
-})
-
-form.addEventListener('submit', (event) => {
-    event.preventDefault()
 
 })
 
@@ -40,28 +37,28 @@ hourContainer.addEventListener('click', (event) => {
         if (previouslySelected) {
             previouslySelected.classList.remove('hour-selected')
         }
-         console.log(previouslySelected)
+        event.target.classList.add('hour-selected')
     }
-        
+
     if (hourSelected === previouslySelected) {
         return
+    }    
+
+})
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const hourSchedule = document.querySelector('.hour-selected')
+
+    const scheduleData = {
+        when: dateInput.value,
+        hour: hourSchedule.value,
+        name: name.value
     }
 
-    event.target.classList.add('hour-selected')
-    
-    const hourSchedule = document.querySelector('.hour-selected').value
-    
+    console.log(hourSchedule.value)
 
-
-    /*
-    if (hourSelected) {
-        if (event.target.classList.contains('hour-selected')) {
-            event.target.classList.remove('hour-selected')
-        } else if (event.target.classList.contains("hour-available")) {
-            event.target.classList.add('hour-selected')
-        }
-
-    }
-        */
+    createNewSchedule(scheduleData)
 
 })
