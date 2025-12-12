@@ -1,6 +1,6 @@
 
 export const getSchedules = async (selectedDate) => {
-    const apiUrl = `http://localhost:3333/bagreSchedule?date=${selectedDate}`
+    const apiUrl = `https://bagresschedules.onrender.com/bagreSchedule?date=${selectedDate}`
 
     console.log(`Buscando agendamentos para: ${selectedDate}`)
 

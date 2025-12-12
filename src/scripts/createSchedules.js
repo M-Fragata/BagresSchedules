@@ -1,4 +1,4 @@
-const URL = "http://localhost:3333/bagreSchedule"
+const URL = "https://bagresschedules.onrender.com"
 
 export const createNewSchedule = async (scheduleData) => {
     const response = await fetch(`${URL}`,{
