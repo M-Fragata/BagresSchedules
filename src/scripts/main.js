@@ -71,7 +71,7 @@ form.addEventListener('submit', async (event) => {
     createNewSchedule(scheduleData)
 
     const schedules = await getSchedules(dateInput.value)
-    loadSchedules(schedules)
+    await loadSchedules(schedules)
 
     cleanInputSchedule(name, hourSchedule)
 })
