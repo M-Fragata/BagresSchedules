@@ -1,4 +1,3 @@
-import { getSchedules } from "../scripts/getSchedules.js"
 
 const periodMorning = document.querySelector('#period-morning')
 const periodAfternoon = document.querySelector('#period-afternoon')
@@ -9,6 +8,7 @@ export const loadSchedules = async (schedules) => {
     periodMorning.innerHTML = ''
     periodAfternoon.innerHTML = ''
     periodNight.innerHTML = ''
+
 
     const schedulesMorning = schedules.map((schedule) => {
 

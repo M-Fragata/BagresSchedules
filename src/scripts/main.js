@@ -4,7 +4,9 @@ import { createNewSchedule } from "../scripts/createSchedules.js"
 import { getSchedules } from "./getSchedules.js"
 import { loadSchedules } from "./loadSchedules.js"
 import { cleanInputSchedule } from "./cleanInputSchedule.js"
-import { hourIsAvalialable } from "./hourIsAvalialable.js"
+import { hourIsPast } from "./hourIsPast.js"
+import { scheduleAvaliable } from "./scheduleAvaliable.js"
+
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
@@ -16,21 +18,28 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     dateInput.value = dayjs().format("YYYY-MM-DD")
 
-    renderHours(openingHours, hourIsAvalialable)
+    const schedules = await getSchedules(dateInput.value)
+    const hourCounts = await scheduleAvaliable(schedules)
+    const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
     getSchedules(dateInput.value)
 
-    const schedules = await getSchedules(dateInput.value)
     loadSchedules(schedules)
+    scheduleAvaliable(schedules)
+
+    renderHours(openingHours, checkAvailability)
+
 })
 
 dateInput.addEventListener('change', async () => {
 
-    renderHours(openingHours, hourIsAvalialable)
-
     const schedules = await getSchedules(dateInput.value)
-    loadSchedules(schedules)
+    const hourCounts = await scheduleAvaliable(schedules)
+    const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
+    renderHours(openingHours, checkAvailability)
+
+    loadSchedules(schedules)
 })
 
 
@@ -68,5 +77,9 @@ form.addEventListener('submit', async (event) => {
     const schedules = await getSchedules(dateInput.value)
     await loadSchedules(schedules)
 
+    const hourCounts = await scheduleAvaliable(schedules)
+    const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
+    renderHours(openingHours, checkAvailability)
+    
     cleanInputSchedule(name, hourSchedule)
 })

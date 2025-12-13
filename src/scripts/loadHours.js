@@ -1,5 +1,5 @@
 
-export function renderHours(hours, hourIsAvalialableFunctionisBefore) {
+export function renderHours(hours, hourIsPastFunctionisBefore) {
 
     const targetMorning = document.querySelector('#morning')
     const targetAfternoon = document.querySelector('#afternoon')
@@ -10,7 +10,7 @@ export function renderHours(hours, hourIsAvalialableFunctionisBefore) {
 
         const [hourNumber] = hour.split(":")
 
-        const isBlocked = hourIsAvalialableFunctionisBefore(hour)
+        const isBlocked = hourIsPastFunctionisBefore(hour)
 
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
@@ -27,7 +27,7 @@ export function renderHours(hours, hourIsAvalialableFunctionisBefore) {
 
         const [hourNumber] = hour.split(":")
 
-        const isBlocked = hourIsAvalialableFunctionisBefore(hour)
+        const isBlocked = hourIsPastFunctionisBefore(hour)
 
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
@@ -45,7 +45,7 @@ export function renderHours(hours, hourIsAvalialableFunctionisBefore) {
 
         const [hourNumber] = hour.split(":")
 
-        const isBlocked = hourIsAvalialableFunctionisBefore(hour)
+        const isBlocked = hourIsPastFunctionisBefore(hour)
 
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
