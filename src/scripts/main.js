@@ -6,13 +6,14 @@ import { loadSchedules } from "./loadSchedules.js"
 import { cleanInputSchedule } from "./cleanInputSchedule.js"
 import { hourIsPast } from "./hourIsPast.js"
 import { scheduleAvaliable } from "./scheduleAvaliable.js"
+import { deledSchedule } from "./deleteSchedules.js"
 
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
 const hourContainer = document.querySelector('#hours')
 const name = document.querySelector('#client')
-
+const cancel = document.querySelector('.schedule-period')
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -52,12 +53,20 @@ hourContainer.addEventListener('click', (event) => {
             previouslySelected.classList.remove('hour-selected')
         }
         event.target.classList.add('hour-selected')
+        console.log("Não cancelado")
     }
 
     if (hourSelected === previouslySelected) {
         return
     }
 
+})
+
+cancel.addEventListener('click', (event) => {
+    if(event.target.classList.contains('cancel-icon')) {
+        console.log("Agendamento cancelado")
+    }
+    // deledSchedule
 })
 
 form.addEventListener('submit', async (event) => {
@@ -80,6 +89,6 @@ form.addEventListener('submit', async (event) => {
     const hourCounts = await scheduleAvaliable(schedules)
     const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
     renderHours(openingHours, checkAvailability)
-    
+
     cleanInputSchedule(name, hourSchedule)
 })
