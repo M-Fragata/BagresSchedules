@@ -13,7 +13,7 @@ const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
 const hourContainer = document.querySelector('#hours')
 const name = document.querySelector('#client')
-const cancel = document.querySelector('.schedule-period')
+const cancel = document.querySelector('.schedule')
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -39,7 +39,7 @@ dateInput.addEventListener('change', async () => {
     const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
     renderHours(openingHours, checkAvailability)
-
+    //console.log(schedules)
     loadSchedules(schedules)
 })
 
@@ -62,11 +62,11 @@ hourContainer.addEventListener('click', (event) => {
 
 })
 
-cancel.addEventListener('click', (event) => {
-    if(event.target.classList.contains('cancel-icon')) {
-        console.log("Agendamento cancelado")
+cancel.addEventListener('click', async (event, dateInput) => {
+    if (event.target.classList.contains('cancel-icon')) {
+       
+        deledSchedule(event, dateInput)
     }
-    // deledSchedule
 })
 
 form.addEventListener('submit', async (event) => {

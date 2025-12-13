@@ -19,7 +19,7 @@ export const loadSchedules = async (schedules) => {
 
         if (scheduleHourNumber >= 8 && scheduleHourNumber <= 11) {
             return `
-                    <li>
+                    <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
                         <img
@@ -40,7 +40,7 @@ export const loadSchedules = async (schedules) => {
 
         if (scheduleHourNumber >= 14 && scheduleHourNumber <= 17) {
             return `
-                    <li>
+                    <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
                         <img
@@ -61,7 +61,7 @@ export const loadSchedules = async (schedules) => {
 
         if (scheduleHourNumber > 17 && scheduleHourNumber <= 21) {
             return `
-                    <li>
+                    <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
                         <img

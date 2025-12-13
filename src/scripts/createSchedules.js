@@ -11,7 +11,7 @@ export const createNewSchedule = async (scheduleData) => {
 
     if(response.status === 400) {
         const errorData = await response.json()
-        console.error("Erro de validação do backend", errorData.details)
+        console.error("POST - Erro de validação do backend", errorData.details)
         throw new Error("Dados incompletos! Verifique os campos")
     }
 
