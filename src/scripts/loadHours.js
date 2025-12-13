@@ -1,5 +1,5 @@
 
-export function renderHours(hours, isBefore) {
+export function renderHours(hours, shouldBlockSlotFunctionisBefore) {
 
     const targetMorning = document.querySelector('#morning')
     const targetAfternoon = document.querySelector('#afternoon')
@@ -10,21 +10,16 @@ export function renderHours(hours, isBefore) {
 
         const [hourNumber] = hour.split(":")
 
-        if (Number(hourNumber) >= 8 && Number(hourNumber) <= 11) {
+        const isBlocked = shouldBlockSlotFunctionisBefore(hour)
 
-            if (isBefore) {
+        const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
+
+        if (Number(hourNumber) >= 8 && Number(hourNumber) <= 11) {
                 return `
             <div class="hour-schedule">
-            <li data-period="morning" value="${hour}" class="hour hour-available">${hour}</li>
+            <li data-period="morning" value="${hour}" class="hour ${hourClass}">${hour}</li>
             </div>
-            `
-            } else {
-                return `
-            <div class="hour-schedule">
-            <li data-period="morning" value="${hour}" class="hour hour-unavailable">${hour}</li>
-            </div>
-            `
-            }
+            `     
         }
     }).join("")
 
@@ -32,21 +27,17 @@ export function renderHours(hours, isBefore) {
 
         const [hourNumber] = hour.split(":")
 
+        const isBlocked = shouldBlockSlotFunctionisBefore(hour)
+
+        const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
+
         if (Number(hourNumber) > 11 && Number(hourNumber) <= 17) {
-            if (isBefore) {
-                return `
-            <div class="hour-schedule">
-            <li data-period="afternoon" value="${hour}" class="hour hour-available">${hour}</li>
-            </div>
-            `
-            } else {
-                return `
-            <div class="hour-schedule">
-            <li data-period="afternoon" value="${hour}" class="hour hour-unavailable">${hour}</li>
-            </div>
-            `
-            }
             
+                return `
+            <div class="hour-schedule">
+            <li data-period="afternoon" value="${hour}" class="hour ${hourClass}">${hour}</li>
+            </div>
+            `          
         }
     }).join("")
 
@@ -54,22 +45,17 @@ export function renderHours(hours, isBefore) {
 
         const [hourNumber] = hour.split(":")
 
+        const isBlocked = shouldBlockSlotFunctionisBefore(hour)
+
+        const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
+
         if (Number(hourNumber) > 17 && Number(hourNumber) <= 21) {
             
-            if (isBefore) {
                 return `
             <div class="hour-schedule">
-            <li data-period="night" value="${hour}" class="hour hour-available" >${hour}</li>
+            <li data-period="night" value="${hour}" class="hour ${hourClass}">${hour}</li>
             </div>
-            `
-            } else {
-                return `
-            <div class="hour-schedule">
-            <li data-period="night" value="${hour}" class="hour hour-unavailable">${hour}</li>
-            </div>
-            `
-            }
-            
+            `          
         }
     }).join("")
 

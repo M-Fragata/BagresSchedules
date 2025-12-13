@@ -4,6 +4,7 @@ import { createNewSchedule } from "../scripts/createSchedules.js"
 import { getSchedules } from "./getSchedules.js"
 import { loadSchedules } from "./loadSchedules.js"
 import { cleanInputSchedule } from "./cleanInputSchedule.js"
+import { shouldBlockSlot } from "./hourAvalialable.js"
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     dateInput.value = dayjs().format("YYYY-MM-DD")
 
-    renderHours(openingHours)
+    renderHours(openingHours, shouldBlockSlot)
 
     getSchedules(dateInput.value)
 
@@ -25,13 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 dateInput.addEventListener('change', async () => {
 
-    const isBefore = dayjs().isBefore(dayjs(dateInput.value))
-
-    if (!isBefore) {
-        window.alert("Data passada")
-    }
-
-    renderHours(openingHours, isBefore)
+    renderHours(openingHours, shouldBlockSlot)
 
     const schedules = await getSchedules(dateInput.value)
     loadSchedules(schedules)
