@@ -16,10 +16,19 @@ export async function deledSchedule(event, dateInput) {
             })
 
             if (response.status === 204) {
-                alert("Agendamento deletado com sucesso")
 
-                const schedules = await getSchedules(dateInput.value)
-                loadSchedules(schedules)
+                confirm("Deseja cancelar o agendamento?")
+
+                if (confirm) {
+                    alert("Agendamento deletado com sucesso")
+
+                    const schedules = await getSchedules(dateInput)
+                    await loadSchedules(schedules)
+
+                    console.log(schedules)
+                }
+
+
             } else {
                 console.error("Falha ao deletar.")
             }

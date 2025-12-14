@@ -62,10 +62,10 @@ hourContainer.addEventListener('click', (event) => {
 
 })
 
-cancel.addEventListener('click', async (event, dateInput) => {
+cancel.addEventListener('click', async (event) => {
     if (event.target.classList.contains('cancel-icon')) {
-       
-        deledSchedule(event, dateInput)
+        
+        deledSchedule(event, dateInput.value)
     }
 })
 
