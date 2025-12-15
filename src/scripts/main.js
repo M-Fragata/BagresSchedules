@@ -27,12 +27,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const schedules = await getSchedules(dateInput.value)
 
-    loadSchedules(schedules)
-
-    renderHours(openingHours)
-
-    getSchedules(dateInput.value)
-
     const hourCounts = await scheduleAvaliable(schedules)
     const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
