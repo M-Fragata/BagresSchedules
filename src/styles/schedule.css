@@ -1,6 +1,7 @@
 .schedule {
   grid-area: schedule;
-  padding: 5rem 7.75rem;
+  padding: 5rem;
+  max-width: 1000px;
 }
 
 .schedule>header {

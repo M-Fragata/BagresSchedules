@@ -24,7 +24,7 @@ app.get("/bagreSchedule", async (req, res) => {
         let query = {}
 
         if (selectedDate) {
-            query = {when: selectedDate}
+            query = { when: selectedDate }
             console.log(`[Backend Log] Filtrando por data: ${selectedDate}`)
         }
 
@@ -38,7 +38,7 @@ app.get("/bagreSchedule", async (req, res) => {
         console.error("Erro ao buscar agendamentos:", error.message);
         return res
             .status(500)
-            .json({ error: "Falha ao buscar agendamentos no banco de dados"})
+            .json({ error: "Falha ao buscar agendamentos no banco de dados" })
     }
 })
 
@@ -60,6 +60,38 @@ app.post("/bagreSchedule", async (req, res) => {
         return res
             .status(400)
             .json({ error: "Falha ao salvar o agendamento no banco de dados." });
+    }
+
+})
+
+app.delete("/bagreSchedule/:id", async (req, res) => {
+
+    const { id } = req.params
+
+    if (!id) {
+        return res
+            .status(400)
+            .json({ error: "ID do agendamento não fornecido." })
+    }
+
+    try {
+
+        const deletedSchedule = await bagreSchedule.findByIdAndDelete(id)
+
+        if (!deletedSchedule) {
+            return res
+                .status(404) // Not Found
+                .json({ error: "Agendamento não encontrado." })
+        }
+
+        return res
+            .status(204)
+            .json();
+
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ error: "Falha ao deletar agendamento" });
     }
 
 })

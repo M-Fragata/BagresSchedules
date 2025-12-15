@@ -4,13 +4,17 @@ import { createNewSchedule } from "../scripts/createSchedules.js"
 import { getSchedules } from "./getSchedules.js"
 import { loadSchedules } from "./loadSchedules.js"
 import { cleanInputSchedule } from "./cleanInputSchedule.js"
+import { hourIsPast } from "./hourIsPast.js"
+import { scheduleAvaliable } from "./scheduleAvaliable.js"
+import { deledSchedule } from "./deleteSchedules.js"
+
 //import { renderSkeletonHours } from "./renderSkeletonHours.js"
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
 const hourContainer = document.querySelector('#hours')
 const name = document.querySelector('#client')
-
+const cancel = document.querySelector('.schedule')
 
 document.addEventListener("DOMContentLoaded", async () => {
     /*
@@ -22,28 +26,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     dateInput.value = dayjs().format("YYYY-MM-DD")
 
     const schedules = await getSchedules(dateInput.value)
+
     loadSchedules(schedules)
 
     renderHours(openingHours)
 
     getSchedules(dateInput.value)
 
+    const hourCounts = await scheduleAvaliable(schedules)
+    const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
+    getSchedules(dateInput.value)
+
+    loadSchedules(schedules)
+    scheduleAvaliable(schedules)
+
+    renderHours(openingHours, checkAvailability)
 })
 
 dateInput.addEventListener('change', async () => {
 
-    const isBefore = dayjs().isBefore(dayjs(dateInput.value))
-
-    if (!isBefore) {
-        window.alert("Data passada")
-    }
-
-    renderHours(openingHours, isBefore)
-
     const schedules = await getSchedules(dateInput.value)
-    loadSchedules(schedules)
+    const hourCounts = await scheduleAvaliable(schedules)
+    const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
+    renderHours(openingHours, checkAvailability)
+    //console.log(schedules)
+    loadSchedules(schedules)
 })
 
 
@@ -56,12 +65,20 @@ hourContainer.addEventListener('click', (event) => {
             previouslySelected.classList.remove('hour-selected')
         }
         event.target.classList.add('hour-selected')
+        console.log("Não cancelado")
     }
 
     if (hourSelected === previouslySelected) {
         return
     }
 
+})
+
+cancel.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('cancel-icon')) {
+        
+        deledSchedule(event, dateInput.value)
+    }
 })
 
 form.addEventListener('submit', async (event) => {
@@ -76,10 +93,14 @@ form.addEventListener('submit', async (event) => {
         name: name.value
     }
 
-    createNewSchedule(scheduleData)
+    await createNewSchedule(scheduleData)
 
     const schedules = await getSchedules(dateInput.value)
-    loadSchedules(schedules)
+    await loadSchedules(schedules)
+
+    const hourCounts = await scheduleAvaliable(schedules)
+    const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
+    renderHours(openingHours, checkAvailability)
 
     cleanInputSchedule(name, hourSchedule)
 })
