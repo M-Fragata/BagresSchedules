@@ -4,6 +4,7 @@ import { createNewSchedule } from "../scripts/createSchedules.js"
 import { getSchedules } from "./getSchedules.js"
 import { loadSchedules } from "./loadSchedules.js"
 import { cleanInputSchedule } from "./cleanInputSchedule.js"
+//import { renderSkeletonHours } from "./renderSkeletonHours.js"
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
@@ -12,15 +13,22 @@ const name = document.querySelector('#client')
 
 
 document.addEventListener("DOMContentLoaded", async () => {
+    /*
+        const showLoadingSkeleton = 
+    
+        hourContainer.innerHTML = renderSkeletonHours()
+        */
 
     dateInput.value = dayjs().format("YYYY-MM-DD")
+
+    const schedules = await getSchedules(dateInput.value)
+    loadSchedules(schedules)
 
     renderHours(openingHours)
 
     getSchedules(dateInput.value)
 
-    const schedules = await getSchedules(dateInput.value)
-    loadSchedules(schedules)
+
 })
 
 dateInput.addEventListener('change', async () => {

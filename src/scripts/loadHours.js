@@ -1,3 +1,4 @@
+//import { renderSkeletonHours } from "./renderSkeletonHours.js"
 
 export function renderHours(hours, isBefore) {
 
@@ -76,4 +77,6 @@ export function renderHours(hours, isBefore) {
     targetMorning.innerHTML = hoursMorning
     targetAfternoon.innerHTML = hoursAfternoon
     targetNight.innerHTML = hoursNight
+
+    //renderSkeletonHours(hiden)
 }

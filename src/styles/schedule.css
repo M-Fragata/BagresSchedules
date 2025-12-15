@@ -3,17 +3,17 @@
   padding: 5rem 7.75rem;
 }
 
-.schedule > header {
+.schedule>header {
   margin-bottom: 2rem;
 }
 
-.schedule > header h1 {
+.schedule>header h1 {
   margin-left: 6rem;
   font-size: 1.5rem;
   font-weight: 700;
 }
 
-.schedule > header p {
+.schedule>header p {
   margin-left: 6rem;
   color: #ff0404;
   font-size: 0.87rem;
@@ -89,7 +89,66 @@
     padding: 1.5rem;
   }
 
-  .schedule > header {
+  .schedule>header {
     flex-direction: column;
+  }
+}
+
+.skeleton-loading {
+  position: relative;
+  overflow: hidden;
+  height: 170px;
+  width: 220px;
+  color: transparent;
+
+  display: flex;
+  gap: 10px;
+}
+
+.skeleton-loading-hours {
+  background-color: #020242;
+  cursor: default;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 60px;
+  height: 33px;
+}
+
+.container-skeleton-loading{
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+
+  p{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.skeleton-loading-hours::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -150%;
+  height: 100%;
+  width: 50%;
+  /* Cor de brilho (de cinza claro para branco/transparente) */
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  /* Animação */
+  animation: loading-shine 2s infinite;
+}
+
+@keyframes loading-shine {
+  from {
+    left: -150%;
+  }
+
+  to {
+    left: 100%;
   }
 }
