@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
-        renderHours(openingHours, checkAvailability, hourContainer)
+        renderHours(openingHours, checkAvailability)
 
         loadSchedules(schedules)
 
@@ -48,7 +48,7 @@ dateInput.addEventListener('change', async () => {
     const hourCounts = await scheduleAvaliable(schedules)
     const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
-    renderHours(openingHours, checkAvailability, hourContainer)
+    renderHours(openingHours, checkAvailability)
     loadSchedules(schedules)
 })
 
@@ -96,7 +96,7 @@ form.addEventListener('submit', async (event) => {
 
     const hourCounts = await scheduleAvaliable(schedules)
     const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
-    renderHours(openingHours, checkAvailability, hourContainer)
+    renderHours(openingHours, checkAvailability)
 
     cleanInputSchedule(name, hourSchedule)
 })

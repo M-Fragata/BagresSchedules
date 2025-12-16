@@ -1,9 +1,6 @@
-export function renderHours(hours, hourIsPastFunctionisBefore, hourContainer) {
+const hourContainer = document.querySelector('#hours')
 
-    const targetMorning = document.querySelector('#morning')
-    const targetAfternoon = document.querySelector('#afternoon')
-    const targetNight = document.querySelector('#night')
-
+export function renderHours(hours, hourIsPastFunctionisBefore) {
 
     const hoursMorning = hours.map(hour => {
 

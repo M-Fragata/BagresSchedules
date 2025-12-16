@@ -1,6 +1,11 @@
 
 import { loadSchedules } from "./loadSchedules.js"
 import { getSchedules } from "./getSchedules.js"
+import { renderHours } from "./loadHours.js"
+import { openingHours } from "../utils/openingHours.js"
+import { scheduleAvaliable } from "./scheduleAvaliable.js"
+import { hourIsPast } from "./hourIsPast.js"
+
 export async function deledSchedule(event, dateInput) {
 
     const scheduleItem = event.target.closest('li')
@@ -12,7 +17,7 @@ export async function deledSchedule(event, dateInput) {
 
         const deleteConfirm = confirm("Deseja cancelar o agendamento?")
 
-        if(!deleteConfirm){
+        if (!deleteConfirm) {
             return
         }
 
@@ -25,6 +30,14 @@ export async function deledSchedule(event, dateInput) {
 
                 const schedules = await getSchedules(dateInput)
                 await loadSchedules(schedules)
+
+                const hourCounts = await scheduleAvaliable(schedules)
+
+                const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
+
+                renderHours(openingHours, checkAvailability)
+
+                console.log("Excluiu")
 
                 alert("Agendamento deletado com sucesso")
 
