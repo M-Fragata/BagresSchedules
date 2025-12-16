@@ -150,9 +150,8 @@
 }
 
 .hour-period {
-  width: 100%;
   color: #ffffff;
-  font-size: 0.87rem;
+  font-size: 1rem;
   font-weight: bold;
   text-align: center;
   margin-top: 0.75rem;

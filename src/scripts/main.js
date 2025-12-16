@@ -7,8 +7,7 @@ import { cleanInputSchedule } from "./cleanInputSchedule.js"
 import { hourIsPast } from "./hourIsPast.js"
 import { scheduleAvaliable } from "./scheduleAvaliable.js"
 import { deledSchedule } from "./deleteSchedules.js"
-
-//import { renderSkeletonHours } from "./renderSkeletonHours.js"
+import { renderSkeletonHours } from "./renderSkeletonHours.js"
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
@@ -17,25 +16,34 @@ const name = document.querySelector('#client')
 const cancel = document.querySelector('.schedule')
 
 document.addEventListener("DOMContentLoaded", async () => {
-    /*
-        const showLoadingSkeleton = 
-    
-        hourContainer.innerHTML = renderSkeletonHours()
-        */
 
-    dateInput.value = dayjs().format("YYYY-MM-DD")
+    hourContainer.innerHTML = renderSkeletonHours()
 
-    const schedules = await getSchedules(dateInput.value)
+    try {
+        dateInput.value = dayjs().format("YYYY-MM-DD")
 
-    const hourCounts = await scheduleAvaliable(schedules)
-    const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
+        await new Promise(resolve => setTimeout(resolve, 1500))
 
-    getSchedules(dateInput.value)
+        const schedules = await getSchedules(dateInput.value)
 
-    loadSchedules(schedules)
-    scheduleAvaliable(schedules)
+        const hourCounts = await scheduleAvaliable(schedules)
 
-    renderHours(openingHours, checkAvailability)
+        const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
+
+        //getSchedules(dateInput.value)
+
+        //scheduleAvaliable(schedules)
+
+        renderHours(openingHours, checkAvailability, hourContainer)
+
+        loadSchedules(schedules)
+
+    } catch (error) {
+        console.log(error);
+        alert("Erro ao buscar agendamentos");
+    }
+
+
 })
 
 dateInput.addEventListener('change', async () => {
@@ -44,8 +52,7 @@ dateInput.addEventListener('change', async () => {
     const hourCounts = await scheduleAvaliable(schedules)
     const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
 
-    renderHours(openingHours, checkAvailability)
-    //console.log(schedules)
+    renderHours(openingHours, checkAvailability, hourContainer)
     loadSchedules(schedules)
 })
 
@@ -59,7 +66,6 @@ hourContainer.addEventListener('click', (event) => {
             previouslySelected.classList.remove('hour-selected')
         }
         event.target.classList.add('hour-selected')
-        console.log("Não cancelado")
     }
 
     if (hourSelected === previouslySelected) {
@@ -70,7 +76,7 @@ hourContainer.addEventListener('click', (event) => {
 
 cancel.addEventListener('click', async (event) => {
     if (event.target.classList.contains('cancel-icon')) {
-        
+
         deledSchedule(event, dateInput.value)
     }
 })
@@ -94,7 +100,7 @@ form.addEventListener('submit', async (event) => {
 
     const hourCounts = await scheduleAvaliable(schedules)
     const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
-    renderHours(openingHours, checkAvailability)
+    renderHours(openingHours, checkAvailability, hourContainer)
 
     cleanInputSchedule(name, hourSchedule)
 })

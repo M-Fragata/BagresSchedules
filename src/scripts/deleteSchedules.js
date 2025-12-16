@@ -10,6 +10,12 @@ export async function deledSchedule(event, dateInput) {
 
         const URL = `https://bagresschedules.onrender.com/bagreSchedule/${scheduleId}`
 
+        const deleteConfirm = confirm("Deseja cancelar o agendamento?")
+
+        if(!deleteConfirm){
+            return
+        }
+
         try {
             const response = await fetch(URL, {
                 method: "DELETE",
@@ -17,20 +23,11 @@ export async function deledSchedule(event, dateInput) {
 
             if (response.status === 204) {
 
-                confirm("Deseja cancelar o agendamento?")
+                const schedules = await getSchedules(dateInput)
+                await loadSchedules(schedules)
 
-                if (confirm) {
-                    alert("Agendamento deletado com sucesso")
+                alert("Agendamento deletado com sucesso")
 
-                    const schedules = await getSchedules(dateInput)
-                    await loadSchedules(schedules)
-
-                    console.log(schedules)
-                }
-
-
-            } else {
-                console.error("Falha ao deletar.")
             }
 
             if (response.status === 400) {

@@ -1,11 +1,17 @@
-/*
-export function renderSkeletonHours(numSlots = 8, hiden) {
-    
-    let skeletonHTML = `
-          <div class="hour skeleton-loading">
+
+export function renderSkeletonHours() {
+
+  const skeletonHTML = `
+  <div>
+    <div>
+        <span class="load-hour-animation">Carregando Horários . . .</span>
+    </div>
+
+      <div class="skeleton-loading">
 
         <div class="container-skeleton-loading">
           <p>Manhã</p>
+          <div class="skeleton-loading-hours"></div>
           <div class="skeleton-loading-hours"></div>
           <div class="skeleton-loading-hours"></div>
           <div class="skeleton-loading-hours"></div>
@@ -16,6 +22,7 @@ export function renderSkeletonHours(numSlots = 8, hiden) {
           <div class="skeleton-loading-hours"></div>
           <div class="skeleton-loading-hours"></div>
           <div class="skeleton-loading-hours"></div>
+          <div class="skeleton-loading-hours"></div>
         </div>
 
         <div class="container-skeleton-loading">
@@ -23,12 +30,12 @@ export function renderSkeletonHours(numSlots = 8, hiden) {
           <div class="skeleton-loading-hours"></div>
           <div class="skeleton-loading-hours"></div>
           <div class="skeleton-loading-hours"></div>
+          <div class="skeleton-loading-hours"></div>
         </div>
 
       </div>
+
+    </div>
     `
-
-    return skeletonHTML
-
+  return skeletonHTML
 }
-    */

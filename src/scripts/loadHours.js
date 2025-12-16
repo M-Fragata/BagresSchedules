@@ -1,6 +1,4 @@
-//import { renderSkeletonHours } from "./renderSkeletonHours.js"
-
-export function renderHours(hours, hourIsPastFunctionisBefore) {
+export function renderHours(hours, hourIsPastFunctionisBefore, hourContainer) {
 
     const targetMorning = document.querySelector('#morning')
     const targetAfternoon = document.querySelector('#afternoon')
@@ -16,11 +14,11 @@ export function renderHours(hours, hourIsPastFunctionisBefore) {
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
         if (Number(hourNumber) >= 8 && Number(hourNumber) <= 11) {
-                return `
+            return `
             <div class="hour-schedule">
             <li data-period="morning" value="${hour}" class="hour ${hourClass}">${hour}</li>
             </div>
-            `     
+            `
         }
     }).join("")
 
@@ -33,12 +31,12 @@ export function renderHours(hours, hourIsPastFunctionisBefore) {
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
         if (Number(hourNumber) > 11 && Number(hourNumber) <= 17) {
-            
-                return `
+
+            return `
             <div class="hour-schedule">
             <li data-period="afternoon" value="${hour}" class="hour ${hourClass}">${hour}</li>
             </div>
-            `          
+            `
         }
     }).join("")
 
@@ -51,18 +49,42 @@ export function renderHours(hours, hourIsPastFunctionisBefore) {
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
         if (Number(hourNumber) > 17 && Number(hourNumber) <= 21) {
-            
-                return `
+
+            return `
             <div class="hour-schedule">
             <li data-period="night" value="${hour}" class="hour ${hourClass}">${hour}</li>
             </div>
-            `          
+            `
         }
     }).join("")
 
-    targetMorning.innerHTML = hoursMorning
-    targetAfternoon.innerHTML = hoursAfternoon
-    targetNight.innerHTML = hoursNight
+    return hourContainer.innerHTML = `
+    <div>
+        <div>
+            <span class="label">Horários</span>
+        </div>
+        <div class="hours">
+            <div>
+            <li data-period="morning" class="hour-period"><p>Manhã</p></li>
+            <ul id="morning">
+                ${hoursMorning}
+            </ul>
+            </div>
 
-    //renderSkeletonHours(hiden)
+            <div>
+            <li data-period="afternoon" class="hour-period">Tarde</li>
+            <ul id="afternoon">
+                ${hoursAfternoon}
+            </ul>
+            </div>
+
+            <div>
+            <li data-period="night" class="hour-period">Noite</li>
+            <ul id="night">
+                ${hoursNight}
+            </ul>
+            </div>
+        </div>
+    </div>
+    `
 }
