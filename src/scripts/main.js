@@ -22,17 +22,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         dateInput.value = dayjs().format("YYYY-MM-DD")
 
-        await new Promise(resolve => setTimeout(resolve, 1500))
+        await new Promise(resolve => setTimeout(resolve, 1000))
 
         const schedules = await getSchedules(dateInput.value)
 
         const hourCounts = await scheduleAvaliable(schedules)
 
         const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
-
-        //getSchedules(dateInput.value)
-
-        //scheduleAvaliable(schedules)
 
         renderHours(openingHours, checkAvailability, hourContainer)
 

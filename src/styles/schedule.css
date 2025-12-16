@@ -145,7 +145,7 @@
       rgba(255, 255, 255, 0.093) 50%,
       rgba(255, 255, 255, 0) 100%);
   /* Animação */
-  animation: loading-shine 2.4s infinite;
+  animation: loading-shine 1.8s infinite;
 }
 
 @keyframes loading-shine {
