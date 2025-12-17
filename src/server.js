@@ -96,6 +96,38 @@ app.delete("/bagreSchedule/:id", async (req, res) => {
 
 })
 
+app.put("/bagreSchedule/:id", async (req, res) => {
+
+    const { id } = req.params
+
+    if (!id) {
+        return res
+            .status(400)
+            .json({ error: "ID do agendamento não fornecido." })
+    }
+
+    try {
+
+        const editedSchedule = await bagreSchedule.findByIdAndReplace(id, req.body, {new: true})
+
+        if (!editedSchedule) {
+            return res
+                .status(404) // Not Found
+                .json({ error: "Agendamento não encontrado." })
+        }
+
+        return res
+            .status(200)
+            .json();
+
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ error: "Falha ao editar agendamento" });
+    }
+
+})
+
 const startServer = async () => {
 
     await database()

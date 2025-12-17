@@ -103,9 +103,10 @@
 .skeleton-loading {
   position: relative;
   overflow: hidden;
-  height: 175px;
+  height: 178px;
   width: 227px;
   color: transparent;
+  border-radius: 10px;
 
   display: flex;
   gap: 8px;

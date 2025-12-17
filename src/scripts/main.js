@@ -8,6 +8,7 @@ import { hourIsPast } from "./hourIsPast.js"
 import { scheduleAvaliable } from "./scheduleAvaliable.js"
 import { deledSchedule } from "./deleteSchedules.js"
 import { renderSkeletonHours } from "./renderSkeletonHours.js"
+import { editedSchedule } from "./editedSchedule.js"
 
 const dateInput = document.querySelector('#date')
 const form = document.querySelector('form')
@@ -81,7 +82,8 @@ cancel.addEventListener('click', async (event) => {
 edit.addEventListener('click', async (event) => {
     if (event.target.classList.contains('edit-icon')) {
 
-        alert("Tecnologia ainda em implementação")
+        editedSchedule(event, name, openingHours)
+
     }
 })
 
