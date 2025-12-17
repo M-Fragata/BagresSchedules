@@ -14,6 +14,7 @@ const form = document.querySelector('form')
 const hourContainer = document.querySelector('#hours')
 const name = document.querySelector('#client')
 const cancel = document.querySelector('.schedule')
+const edit = document.querySelector('.schedule')
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -76,6 +77,14 @@ cancel.addEventListener('click', async (event) => {
         deledSchedule(event, dateInput.value)
     }
 })
+
+edit.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('edit-icon')) {
+
+        alert("Tecnologia ainda em implementação")
+    }
+})
+
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()

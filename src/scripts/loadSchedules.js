@@ -15,13 +15,18 @@ export const loadSchedules = async (schedules) => {
         const scheduleHour = schedule.hour
         const [scheduleHourString] = scheduleHour.split(":")
         const scheduleHourNumber = Number(scheduleHourString)
-        
+
 
         if (scheduleHourNumber >= 8 && scheduleHourNumber <= 11) {
             return `
                     <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
+                        <img
+                            src="../src/assets/edit.svg"
+                            alt="Editar-agendamento"
+                            class="edit-icon"
+                        />
                         <img
                             src="../src/assets/cancel.svg"
                             alt="Cancelar"
@@ -44,6 +49,11 @@ export const loadSchedules = async (schedules) => {
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
                         <img
+                            src="../src/assets/edit.svg"
+                            alt="Editar-agendamento"
+                            class="edit-icon"
+                        />
+                        <img
                             src="../src/assets/cancel.svg"
                             alt="Cancelar"
                             class="cancel-icon"
@@ -64,6 +74,11 @@ export const loadSchedules = async (schedules) => {
                     <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
+                        <img
+                            src="../src/assets/edit.svg"
+                            alt="Editar-agendamento"
+                            class="edit-icon"
+                        />
                         <img
                             src="../src/assets/cancel.svg"
                             alt="Cancelar"
