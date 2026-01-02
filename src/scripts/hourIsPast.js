@@ -9,11 +9,11 @@ export const hourIsPast = (slotTime, hourCounts) => {
 
     // Se NÃO for segunda (1) E NÃO for quarta (3), bloqueia tudo
     if (diaSemana !== 1 && diaSemana !== 3) {
-        dateIsDisponivel.innerHTML = `Data <strong style="color: red;">INDISPONÍVEL</strong>`
+        dateIsDisponivel.innerHTML = `Data <strong style="background: #f30202b7; border-radius: 10px; padding: 1px 10px;">INDISPONÍVEL</strong>`
         return true
     }
 
-    dateIsDisponivel.innerHTML = `Data <strong style="color: darkgreen;">DISPONÍVEL</strong>`
+    dateIsDisponivel.innerHTML = `Data <strong style="background: #02f352b7; border-radius: 10px; padding: 1px 10px;">DISPONÍVEL</strong>`
 
     const count = hourCounts[slotTime] || 0
     const maxSchedules = 4

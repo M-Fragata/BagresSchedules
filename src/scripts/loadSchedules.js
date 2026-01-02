@@ -12,12 +12,10 @@ export const loadSchedules = async (schedules) => {
 
     const schedulesMorning = schedules.map((schedule) => {
 
-        const scheduleHour = schedule.hour
-        const [scheduleHourString] = scheduleHour.split(":")
-        const scheduleHourNumber = Number(scheduleHourString)
+        const scheduleHourNumber = Number(schedule.hour.replace(":", ""))
 
 
-        if (scheduleHourNumber >= 8 && scheduleHourNumber <= 11) {
+        if (scheduleHourNumber >= 800 && scheduleHourNumber <= 1100) {
             return `
                     <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
@@ -41,11 +39,9 @@ export const loadSchedules = async (schedules) => {
 
     const schedulesAfternoon = schedules.map((schedule) => {
 
-        const scheduleHour = schedule.hour
-        const [scheduleHourString] = scheduleHour.split(":")
-        const scheduleHourNumber = Number(scheduleHourString)
+        const scheduleHourNumber = Number(schedule.hour.replace(":",""))
 
-        if (scheduleHourNumber <= 17) {
+        if (scheduleHourNumber >= 1400 && scheduleHourNumber <= 1700) {
             return `
                     <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
@@ -68,12 +64,10 @@ export const loadSchedules = async (schedules) => {
     }).join("")
 
     const schedulesNight = schedules.map((schedule) => {
+        
+        const scheduleHourNumber = Number(schedule.hour.replace(":",""))
 
-        const scheduleHour = schedule.hour
-        const [scheduleHourString] = scheduleHour.split(":")
-        const scheduleHourNumber = Number(scheduleHourString)
-
-        if (scheduleHourNumber <= 21) {
+        if (scheduleHourNumber > 1700 && scheduleHourNumber <= 2100) {
             return `
                     <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>

@@ -53,6 +53,10 @@
   color: #ff0404;
 }
 
+form > label{
+  margin-bottom: 3px;
+}
+
 .label {
   font-size: 1rem;
   color: #ffffff;
