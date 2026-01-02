@@ -23,17 +23,19 @@ export const loadSchedules = async (schedules) => {
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
                         <img
-                            src="../src/assets/edit.svg"
-                            alt="Editar-agendamento"
-                            class="edit-icon"
-                        />
-                        <img
                             src="../src/assets/cancel.svg"
                             alt="Cancelar"
                             class="cancel-icon"
                         />
                     </li>
                     `
+                        /*
+                            <img
+                                src="../src/assets/edit.svg"
+                                alt="Editar-agendamento"
+                                class="edit-icon"
+                            />
+                        */
         }
     }).join("")
 
@@ -43,16 +45,11 @@ export const loadSchedules = async (schedules) => {
         const [scheduleHourString] = scheduleHour.split(":")
         const scheduleHourNumber = Number(scheduleHourString)
 
-        if (scheduleHourNumber >= 14 && scheduleHourNumber <= 17) {
+        if (scheduleHourNumber <= 17) {
             return `
                     <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
-                        <img
-                            src="../src/assets/edit.svg"
-                            alt="Editar-agendamento"
-                            class="edit-icon"
-                        />
                         <img
                             src="../src/assets/cancel.svg"
                             alt="Cancelar"
@@ -60,6 +57,13 @@ export const loadSchedules = async (schedules) => {
                         />
                     </li>
                     `
+                        /*
+                            <img
+                                src="../src/assets/edit.svg"
+                                alt="Editar-agendamento"
+                                class="edit-icon"
+                            />
+                        */
         }
     }).join("")
 
@@ -69,16 +73,11 @@ export const loadSchedules = async (schedules) => {
         const [scheduleHourString] = scheduleHour.split(":")
         const scheduleHourNumber = Number(scheduleHourString)
 
-        if (scheduleHourNumber > 17 && scheduleHourNumber <= 21) {
+        if (scheduleHourNumber <= 21) {
             return `
                     <li data-id="${schedule._id}" class="schedule-item">
                         <strong>${schedule.hour}</strong>
                         <span>${schedule.name}</span>
-                        <img
-                            src="../src/assets/edit.svg"
-                            alt="Editar-agendamento"
-                            class="edit-icon"
-                        />
                         <img
                             src="../src/assets/cancel.svg"
                             alt="Cancelar"
@@ -86,6 +85,13 @@ export const loadSchedules = async (schedules) => {
                         />
                     </li>
                     `
+                        /*
+                            <img
+                                src="../src/assets/edit.svg"
+                                alt="Editar-agendamento"
+                                class="edit-icon"
+                            />
+                        */
         }
     }).join("")
 

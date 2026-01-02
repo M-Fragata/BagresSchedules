@@ -4,13 +4,13 @@ export function renderHours(hours, hourIsPastFunctionisBefore) {
 
     const hoursMorning = hours.map(hour => {
 
-        const [hourNumber] = hour.split(":")
+        const hourNumber = Number(hour.replace(":", ""))
 
         const isBlocked = hourIsPastFunctionisBefore(hour)
 
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
-        if (Number(hourNumber) >= 8 && Number(hourNumber) <= 11) {
+        if (Number(hourNumber) >= 800 && Number(hourNumber) <= 1100) {
             return `
             <div class="hour-schedule">
             <li data-period="morning" value="${hour}" class="hour ${hourClass}">${hour}</li>
@@ -21,13 +21,13 @@ export function renderHours(hours, hourIsPastFunctionisBefore) {
 
     const hoursAfternoon = hours.map(hour => {
 
-        const [hourNumber] = hour.split(":")
+        const hourNumber = Number(hour.replace(":", ""))
 
         const isBlocked = hourIsPastFunctionisBefore(hour)
 
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
-        if (Number(hourNumber) > 11 && Number(hourNumber) <= 17) {
+        if (Number(hourNumber) > 1100 && Number(hourNumber) <= 1700) {
 
             return `
             <div class="hour-schedule">
@@ -39,13 +39,13 @@ export function renderHours(hours, hourIsPastFunctionisBefore) {
 
     const hoursNight = hours.map(hour => {
 
-        const [hourNumber] = hour.split(":")
+        const hourNumber = Number(hour.replace(":", ""))
 
         const isBlocked = hourIsPastFunctionisBefore(hour)
 
         const hourClass = isBlocked ? 'hour-unavailable' : 'hour-available'
 
-        if (Number(hourNumber) > 17 && Number(hourNumber) <= 21) {
+        if (Number(hourNumber) > 1700 && Number(hourNumber) <= 2100) {
 
             return `
             <div class="hour-schedule">
@@ -54,6 +54,7 @@ export function renderHours(hours, hourIsPastFunctionisBefore) {
             `
         }
     }).join("")
+
 
     return hourContainer.innerHTML = `
     <div>

@@ -79,6 +79,8 @@ cancel.addEventListener('click', async (event) => {
     }
 })
 
+/* 
+//Tecnologia sendo implementada
 edit.addEventListener('click', async (event) => {
     if (event.target.classList.contains('edit-icon')) {
 
@@ -86,7 +88,7 @@ edit.addEventListener('click', async (event) => {
 
     }
 })
-
+*/
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()

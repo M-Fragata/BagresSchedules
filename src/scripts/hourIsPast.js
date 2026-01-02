@@ -1,8 +1,20 @@
 
 const dateInput = document.querySelector('#date')
+const dateIsDisponivel = document.querySelector('#isDisponivel')
 
 export const hourIsPast = (slotTime, hourCounts) => {
-    
+
+    const dataSelecionada = dayjs(dateInput.value);
+    const diaSemana = dataSelecionada.day();
+
+    // Se NÃO for segunda (1) E NÃO for quarta (3), bloqueia tudo
+    if (diaSemana !== 1 && diaSemana !== 3) {
+        dateIsDisponivel.innerHTML = `Data <strong style="color: red;">INDISPONÍVEL</strong>`
+        return true
+    }
+
+    dateIsDisponivel.innerHTML = `Data <strong style="color: darkgreen;">DISPONÍVEL</strong>`
+
     const count = hourCounts[slotTime] || 0
     const maxSchedules = 4
 

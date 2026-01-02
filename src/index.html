@@ -28,13 +28,18 @@
     <form class="form">
       <header>
         <h1>Agende seu treinamento</h1>
-        <p>
-          Selecione data, horário e informe o nome do atleta para criar o
-          agendamento
-        </p>
+        <div class="avisos">
+          <h2>Informações</h2>
+          <p>
+            Atenção! <br>
+            Agendamentos para Treinos apenas <strong>Segundas e Quartas</strong>. <br>
+            Informe o horário e o nome do atleta para criar o
+            agendamento.
+          </p>
+        </div>
       </header>
 
-      <label for="date" class="label">Data</label>
+      <label for="date" id="isDisponivel" class="label">Data</label>
       <div class="input">
         <i><img src="./assets/calendar.png" alt="Calendário" /></i>
         <input type="date" id="date" name="when" required />
