@@ -46,12 +46,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 dateInput.addEventListener('change', async () => {
 
-    const schedules = await getSchedules(dateInput.value)
-    const hourCounts = await scheduleAvaliable(schedules)
-    const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
+    hourContainer.innerHTML = renderSkeletonHours()
 
-    renderHours(openingHours, checkAvailability)
-    loadSchedules(schedules)
+    try {
+        const schedules = await getSchedules(dateInput.value)
+        const hourCounts = await scheduleAvaliable(schedules)
+        const checkAvailability = (slotTime) => hourIsPast(slotTime, hourCounts)
+
+        setTimeout(() => {
+            renderHours(openingHours, checkAvailability);
+            loadSchedules(schedules);
+        }, 900)
+
+    } catch (error) {
+        console.error("Erro ao carregar", error);
+    }
+
 })
 
 
